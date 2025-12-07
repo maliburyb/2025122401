@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Snowfall from './components/Snowfall';
 import Header from './components/Header';
 import GameCard from './components/GameCard';
+import MagicPhotoBooth from './components/MagicPhotoBooth';
 import { GAMES, PARTY_DETAILS, SCHEDULE, WELCOME_MESSAGE } from './constants';
 import { MapPin, Calendar, Clock, Heart, Utensils, MessagesSquare, Gamepad2, Copy, Check } from 'lucide-react';
 
@@ -135,6 +136,9 @@ const App: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* Magic Photo Booth */}
+        <MagicPhotoBooth />
 
         {/* Simple RSVP / Footer Interaction */}
         <section className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-lg border border-white text-center mb-8">
