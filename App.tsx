@@ -4,7 +4,7 @@ import Header from './components/Header';
 import GameCard from './components/GameCard';
 import MagicPhotoBooth from './components/MagicPhotoBooth';
 import { GAMES, PARTY_DETAILS, SCHEDULE, WELCOME_MESSAGE } from './constants';
-import { MapPin, Calendar, Clock, Heart, Utensils, MessagesSquare, Gamepad2, Copy, Check } from 'lucide-react';
+import { MapPin, Calendar, Clock, Heart, Utensils, MessagesSquare, Gamepad2, Copy, Check, Share2 } from 'lucide-react';
 
 const App: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -14,6 +14,25 @@ const App: React.FC = () => {
     navigator.clipboard.writeText(PARTY_DETAILS.address);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: '2025 聖誕私宅聚會',
+      text: '誠摯邀請你來參加 2025 聖誕私宅聚會！麻雀雖小，五臟俱全 🎄',
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('邀請函網址已複製到剪貼簿！');
+    }
   };
 
   return (
@@ -181,6 +200,13 @@ const App: React.FC = () => {
         </section>
 
         <footer className="text-center text-xmas-brown/60 text-xs pb-4">
+          <button 
+            onClick={handleShare}
+            className="mb-4 bg-white/50 hover:bg-white text-xmas-brown px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 mx-auto transition-colors"
+          >
+            <Share2 className="w-4 h-4" />
+            分享邀請函
+          </button>
           <p>© 2025 Christmas Party Invitation</p>
           <p className="mt-1">Designed with Warmth ❤️</p>
         </footer>
